@@ -1,0 +1,87 @@
+
+package boletinextras3_1;
+
+import java.time.LocalDate;
+
+/**
+ *
+ * @author dam1
+ */
+public class Cliente {
+    
+    private int dia;
+    private int mes;
+    private int año;
+    private boolean padres;
+
+    public Cliente() {
+    }
+
+    public Cliente(int dia, int mes, int año, boolean padres) {
+        this.dia = dia;
+        this.mes = mes;
+        this.año = año;
+        this.padres = padres;
+    }
+
+    public int getDia() {
+        return dia;
+    }
+
+    public void setDia(int dia) {
+        this.dia = dia;
+    }
+
+    public int getMes() {
+        return mes;
+    }
+
+    public void setMes(int mes) {
+        this.mes = mes;
+    }
+
+    public int getAño() {
+        return año;
+    }
+
+    public void setAño(int año) {
+        this.año = año;
+    }
+
+    public boolean isPadres() {
+        return padres;
+    }
+
+    public void setPadres(boolean padres) {
+        this.padres = padres;
+    }
+    
+    
+    
+        public  int edad(Cliente cl) {
+        int edadCliente = 0;
+        LocalDate ld = LocalDate.now();
+        int diaHoy = ld.getDayOfMonth();
+        int mesHoy = ld.getMonthValue();
+        int añoHoy = ld.getYear();
+
+        int auxAño = cl.getAño();
+        int auxEdad = añoHoy - auxAño;
+        if (cl.getMes() < mesHoy) {
+
+            auxEdad = auxEdad - 1;
+
+        } else if (cl.getMes() == mesHoy && cl.getDia() > diaHoy) {
+            auxEdad = añoHoy - auxAño;
+
+        } else {
+            auxEdad = añoHoy - auxAño;
+
+        }
+        edadCliente = auxEdad;
+        
+        return edadCliente;
+    }
+    
+    
+}
