@@ -1,0 +1,27 @@
+
+package boletinextras3_1;
+
+import java.io.IOException;
+import java.time.LocalDate;
+
+/**
+ *
+ * @author dam1
+ */
+public class BoletinExtras3_1 {
+
+  
+    public static void main(String[] args) throws IOException {
+     
+       
+        Cliente cl=new Cliente();
+        Metodos.esFechaValida(cl);
+        cl.edad(cl);
+        Metodos.descuento(cl, 0);
+       
+        
+        
+  
+    }
+    
+}
