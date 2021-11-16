@@ -1,0 +1,217 @@
+package boletinextras3_1;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.time.LocalDate;
+
+/**
+ *
+ * @author dam1
+ */
+public class Metodos {
+
+    public static boolean esFechaValida(Cliente cl) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        boolean esValida = true;
+        int o = 0;
+do{
+        System.out.println("Escoge tu mes de nacimiento: \n"
+                + "1- Enero. \n"
+                + "2- Febrero. \n"
+                + "3- Marzo. \n"
+                + "4- Abril. \n"
+                + "5- Mayo. \n"
+                + "6- Junio. \n"
+                + "7- Julio. \n"
+                + "8- Agosto. \n"
+                + "9- Septiembre. \n"
+                + "10- Octubre. \n"
+                + "11- Noviembre. \n"
+                + "12- Diciembre. \n");
+
+        cl.setMes(Integer.parseInt(br.readLine()));
+
+        switch (cl.getMes()) {
+
+            case 1:
+
+                diaValido(cl);
+
+                añoValido(cl);
+                break;
+
+            case 2:
+                añoValido(cl);
+
+                int auxAño = cl.getAño() % 4;
+                if (auxAño == 0) {
+                    int auxDias = 29;
+                    System.out.println("Introduce el dia de nacimiento: ");
+                    cl.setDia(Integer.parseInt(br.readLine()));
+                    if (cl.getDia() > auxDias || cl.getDia() < 1) {
+                        do {
+
+                            System.out.println("Ese dia del mes no existe. \n"
+                                    + " Introduce un valor válido: ");
+                            cl.setDia(Integer.parseInt(br.readLine()));
+
+                        } while (cl.getDia() > auxDias && cl.getDia() < 1);
+                    }
+
+                } else {
+                    int auxDias = 28;
+                    System.out.println("Introduce el dia de nacimiento: ");
+                    cl.setDia(Integer.parseInt(br.readLine()));
+                    if (cl.getDia() > auxDias || cl.getDia() < 1) {
+                        do {
+
+                            System.out.println("Ese dia del mes no existe. \n"
+                                    + " Introduce un valor válido: ");
+                            cl.setDia(Integer.parseInt(br.readLine()));
+
+                        } while (cl.getDia() > auxDias && cl.getDia() < 1);
+                    }
+
+                }
+                break;
+
+            case 3:
+                diaValido(cl);
+                añoValido(cl);
+                break;
+            case 4:
+                diaValido(cl);
+                añoValido(cl);
+                break;
+            case 5:
+                diaValido(cl);
+                añoValido(cl);
+                break;
+            case 6:
+                diaValido(cl);
+                añoValido(cl);
+                break;
+            case 7:
+                diaValido(cl);
+                añoValido(cl);
+                break;
+            case 8:
+                diaValido(cl);
+                añoValido(cl);
+                break;
+            case 9:
+                diaValido(cl);
+                añoValido(cl);
+                break;
+            case 10:
+                diaValido(cl);
+                añoValido(cl);
+                break;
+            case 11:
+                diaValido(cl);
+                añoValido(cl);
+                break;
+            case 12:
+                diaValido(cl);
+                añoValido(cl);
+                break;
+
+        }
+}while(cl.getMes()>12 || cl.getMes()<1);
+
+        return esValida;
+    
+    }
+
+    public static boolean añoValido(Cliente cl) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        boolean añoVal = false;
+        System.out.println("Introduce tu año de nacimiento: ");
+        cl.setAño(Integer.parseInt(br.readLine()));
+        if (cl.getAño() < 1600 || cl.getAño() > 3000) {
+            do {
+                System.out.println("Introduce un año de nacimiento válido: ");
+                cl.setAño(Integer.parseInt(br.readLine()));
+
+            } while (cl.getAño() < 1600 || cl.getAño() > 3000);
+
+        } else {
+            añoVal = true;
+        }
+
+        return añoVal;
+    }
+
+    public static boolean diaValido(Cliente cl) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int auxDias = 0;
+        boolean diaVal = false;
+        if (cl.getMes() == 1 || cl.getMes() == 3 || cl.getMes() == 5 || cl.getMes() == 7 
+                || cl.getMes() == 8 || cl.getMes() == 10 || cl.getMes() == 12) {
+            auxDias = 31;
+
+        } else if (cl.getMes() == 4 || cl.getMes() == 6 || cl.getMes() == 9 || cl.getMes() == 11) {
+            auxDias = 30;
+
+        }
+
+        System.out.println("Introduce el dia de nacimiento: ");
+        cl.setDia(Integer.parseInt(br.readLine()));
+        if (cl.getDia() > auxDias) {
+            do {
+
+                System.out.println("Ese dia del mes no existe. \n"
+                        + " Introduce un valor válido: ");
+                cl.setDia(Integer.parseInt(br.readLine()));
+
+            } while (cl.getDia() > auxDias || cl.getDia() < 1);
+        }
+        diaVal = true;
+
+        return diaVal;
+    }
+
+
+
+    public static int descuento(Cliente cl, int edadCliente) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        float descuento = 0f;
+        float cuota = 800f;
+        String respPadres = "";
+        edadCliente=cl.edad(cl);
+        boolean padreS=false;
+        boolean padreN=false;
+        if (edadCliente > 65) {
+            descuento = (float) (cuota - (cuota * 0.40));
+
+        } else if (edadCliente < 21) {
+            do {
+                System.out.println("Tus padre son socios? S/N");
+                respPadres = br.readLine();
+                if (respPadres.equalsIgnoreCase("S")) {
+                    descuento = (float) (cuota - (cuota * 0.45));
+                    padreS=true;
+
+                } else if (respPadres.equalsIgnoreCase("N")) {
+
+                    descuento = (float) (cuota - (cuota * 0.25));
+                    padreN=true;
+
+                }else{
+                    
+                    descuento=cuota;
+                    
+                }
+
+            } while (padreS==false && padreN==false);
+            
+        }else{
+            descuento=cuota;
+            
+        }
+        System.out.println("La cuota despues del descuento queda en: "+descuento);
+        return (int) descuento;
+    }
+}
